@@ -8,7 +8,8 @@ from sqlalchemy.sql.elements import Null
 
 #---------------------------------  Conexion Base de datos 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1205@localhost:5432/db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1205@localhost:5432/db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://onppjfopaaxjta:00dee83c68dc4fa883bb2f7a1149ba2afff80f744e6aaddbcf3d32b7cfdbc79a@ec2-18-211-185-154.compute-1.amazonaws.com:5432/dc9v507bsqlkrd'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
