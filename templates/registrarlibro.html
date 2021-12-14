@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+        Registrar Libro
+{% endblock %}
+
+{% block nav %} 
+<nav class="cardbg">
+  <div class="container">
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a href="/menu" class="navbar-item">Home</a>
+        <a href="/fav" class="navbar-item">Favoritos</a>
+        <a href="/libro" class="navbar-item">Reg Libro</a>
+        <a href="/verlibro" class="navbar-item">Tabla Libro</a>
+        <a href="/autor" class="navbar-item">Reg Autor</a>
+        <a href="/verautor" class="navbar-item">Tabla Autor</a>
+        <a href="/editorial" class="navbar-item">Reg Editorial</a>
+        <a href="/vereditorial" class="navbar-item">Tabla Editorial</a>
+        <a href="/genero" class="navbar-item">Reg Genero</a>
+        <a href="/vergenero" class="navbar-item">Tabla Genero</a>
+        <a href="/" class="navbar-item">Cerrar Sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+  <section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-table is-4-desktop is-3-widescreen">
+          <form action="/registrar_libro" method="post" class="box">
+            <!-- Nombre del Libro -->
+            <div class="field">
+                <label for="" class="label">Nombre Libro </label>
+                <div>
+                    <input type="text" name="nombre_libro" placeholder="El arte de la guerra" class="input" required>
+                    <span class="icon is-small is-left">
+                    <i class="fa fa-evelope"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Fecha de Publicacion -->
+            <div class="field">
+                <label for="" class="label">Fecha de Publicacion </label>
+                <div>
+                  <input type="date" name="fecha_publicacion" placeholder="YYYY-MM-DD" class="input" required>
+                  <span class="icon is-small is-left">
+                  <i class="fa fa-evelope"></i>
+                  </span>
+                </div>
+            </div>
+
+            <!-- Numero de Paginas -->
+            <div class="field">
+                <label for="" class="label">Numero de Paginas </label>
+                <div>
+                  <input type="number" name="numero_paginas" placeholder="142" class="input" required>
+                  <span class="icon is-small is-left">
+                  <i class="fa fa-evelope"></i>
+                  </span>
+                </div>
+            </div>
+
+            <!-- Formato -->
+            <div class="field">
+              <label for="" class="label">Formato </label>
+              <select name="formato">
+                  <option value="Digital">Digital</option>
+                  <option value="Fisico">Fisico</option>
+              </select>
+            </div>
+
+            <!-- Volumen -->
+            <div class="field">
+                <label for="" class="label">Volumen </label>
+                <div>
+                  <input type="number" name="volumen" placeholder="1" class="input" required>
+                  <span class="icon is-small is-left">
+                  <i class="fa fa-evelope"></i>
+                  </span>
+                </div>
+            </div>
+
+            <!-- Editorial -->
+            <div class="field">
+              <label for="" class="label">Editorial </label>
+              <select name="editorial">
+                {% for editorial in consulta_editorial %}
+                  <option value="{{editorial.id_editorial}}">{{editorial.nombre_editorial}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Genero -->
+            <div class="field">
+              <label for="" class="label">Genero </label>
+              <select name="genero">
+                {% for genero in consulta_genero %}
+                  <option value="{{genero.id_genero}}">{{genero.tipo_genero}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Autor -->
+            <div class="field">
+              <label for="" class="label">Autor </label>
+              <select name="autor">
+                {% for autor in consulta_autor %}
+                  <option value="{{autor.id_autor}}">{{autor.nombre_autor}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Resumen -->
+            <div class="field">
+              <label for="" class="label">Resumen Libro </label>
+              <div>
+                  <input type="text" name="resumen" placeholder="Resumen" class="input" required>
+                  <span class="icon is-small is-left">
+                  <i class="fa fa-evelope"></i>
+                  </span>
+              </div>
+            </div>
+
+            <!-- Portada -->
+            <div class="field">
+              <label for="" class="label">Link de Portada </label>
+              <div>
+                  <input type="text" name="link" placeholder="Resumen" class="input" required>
+                  <span class="icon is-small is-left">
+                  <i class="fa fa-evelope"></i>
+                  </span>
+              </div>
+            </div>
+
+            <div class="field">
+            <button class="button is-success">
+              Registrar
+            </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

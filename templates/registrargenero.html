@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+        Registrar Genero
+{% endblock %}
+
+{% block nav %} 
+<nav class="cardbg">
+  <div class="container">
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a href="/menu" class="navbar-item">Home</a>
+        <a href="/fav" class="navbar-item">Favoritos</a>
+        <a href="/libro" class="navbar-item">Reg Libro</a>
+        <a href="/verlibro" class="navbar-item">Tabla Libro</a>
+        <a href="/autor" class="navbar-item">Reg Autor</a>
+        <a href="/verautor" class="navbar-item">Tabla Autor</a>
+        <a href="/editorial" class="navbar-item">Reg Editorial</a>
+        <a href="/vereditorial" class="navbar-item">Tabla Editorial</a>
+        <a href="/genero" class="navbar-item">Reg Genero</a>
+        <a href="/vergenero" class="navbar-item">Tabla Genero</a>
+        <a href="/" class="navbar-item">Cerrar Sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+  <section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-table is-4-desktop is-3-widescreen">
+          <form action="/registrar_genero" method="post" class="box">
+            
+            <div class="field">
+                <label for="" class="label">Nombre del Genero </label>
+                <div>
+                    <input type="tipo_genero" name="tipo_genero" placeholder="Romance" class="input" required>
+                    <span class="icon is-small is-left">
+                    <i class="fa fa-evelope"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+            <button class="button is-success">
+              Registrar
+            </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

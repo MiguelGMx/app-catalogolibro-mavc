@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+        Tabla de Autores
+{% endblock %}
+
+{% block nav %} 
+<nav class="cardbg">
+  <div class="container">
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a href="/menu" class="navbar-item">Home</a>
+        <a href="/fav" class="navbar-item">Favoritos</a>
+        <a href="/libro" class="navbar-item">Reg Libro</a>
+        <a href="/verlibro" class="navbar-item">Tabla Libro</a>
+        <a href="/autor" class="navbar-item">Reg Autor</a>
+        <a href="/verautor" class="navbar-item">Tabla Autor</a>
+        <a href="/editorial" class="navbar-item">Reg Editorial</a>
+        <a href="/vereditorial" class="navbar-item">Tabla Editorial</a>
+        <a href="/genero" class="navbar-item">Reg Genero</a>
+        <a href="/vergenero" class="navbar-item">Tabla Genero</a>
+        <a href="/" class="navbar-item">Cerrar Sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero is-primary is-fullheight">
+  <div class="a">
+    <label for="" class="label">Autores Almacenados </label>
+    <br>
+    <label for="" class="label">Tabla de Autores alamcenados </label>
+  </div>
+  
+    <div class="hero-body">
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Nacimiento</th>
+          <th>Nacionalidad</th>
+          <th>Eliminar</th>
+          <th>Modificar</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for autor in consulta %}
+        <tr>
+          <td>{{autor.nombre_autor}}</td>
+          <td>{{autor.fecha_nacimiento}}</td>
+          <td>{{autor.nacionalidad}}</td>
+          <td><a href="/eliminarautor/{{autor.nombre_autor}}">Eliminar</a></td>
+          <td><a href="/editarautor/{{autor.nombre_autor}}">Editar</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock %}

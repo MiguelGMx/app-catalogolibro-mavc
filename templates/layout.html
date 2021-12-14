@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="https:/cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="/static/css/estilo.css">
+    <title>
+        {% block title %} 
+        
+        {% endblock %}
+    </title>
+    {% endblock %}
+</head>
+
+<body>
+  <!-- START NAV -->
+  {% block nav%}
+        
+  {% endblock %}
+  
+  <!-- END NAV -->
+  <!-- START CONTENT -->
+  <div id="content">
+    {% block content%}
+        
+    {% endblock %}
+  </div>
+    <!-- END CONTENT -->
+    <!-- START FOOTER -->
+  <div id="footer">
+    <footer class="cardbg">
+      <div class="container">
+        <div class="content has-text-centered">
+          <div class="soc">
+            <a href="#"><i class="fa fa-github-alt fa-lg" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-youtube fa-lg" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
+          </div>
+          <p>
+            <strong>Applicacion </strong> by <a href="#">Miguel Angel Vejar Cortés</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+        Menu Principal
+{% endblock %}
+
+{% block nav %} 
+<nav class="cardbg">
+  <div class="container">
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a href="/menu" class="navbar-item">Home</a>
+        <a href="/fav" class="navbar-item">Favoritos</a>
+        <a href="/libro" class="navbar-item">Reg Libro</a>
+        <a href="/verlibro" class="navbar-item">Tabla Libro</a>
+        <a href="/autor" class="navbar-item">Reg Autor</a>
+        <a href="/verautor" class="navbar-item">Tabla Autor</a>
+        <a href="/editorial" class="navbar-item">Reg Editorial</a>
+        <a href="/vereditorial" class="navbar-item">Tabla Editorial</a>
+        <a href="/genero" class="navbar-item">Reg Genero</a>
+        <a href="/vergenero" class="navbar-item">Tabla Genero</a>
+        <a href="/" class="navbar-item">Cerrar Sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section">
+        <!-- Titulo -->
+      <div class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title" style="color: ghostwhite;">Libros</h1><br>
+        </div>
+      </div>
+      <!-- Cuerpo -->
+      <div id="app" class="row columns is-multiline">
+        <!--Empezar Ciclo For-->
+        {% for libro in consulta_libro %}
+        <div v-for="card in cardData" key="card.id" class="column is-4">
+          <div class="card large">
+            <div class="card-image">
+                <!-- Colocar Imagen al cuadro-->
+              <figure class="image is-16by9">
+                <img src="{{libro.link}}" alt="Image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <!-- Titulo del Libro -->
+                  <p class="title is-4 no-padding">{{libro.nombre_libro}}</p>
+                  <!-- Autor-->
+                  <p class="subtittle is-6">{{libro.nombre_autor}} ({{libro.nacionalidad}})</p>
+                  <!-- fecha publicacion-->
+                  <p class="subtittle is-6">{{libro.fecha_publicacion}}</p>
+                  <!-- Genero-->
+                  <p class="subtittle is-6">Genero: {{libro.tipo_genero}}</p>
+                  <!-- Editorial-->
+                  <p class="subtittle is-6">Editorial: {{libro.nombre_editorial}}</p>
+                  <!-- Paginas-->
+                  <p class="subtittle is-6">Paginas: {{libro.numero_paginas}}</p>
+                  <!-- formato-->
+                  <p class="subtittle is-6">Formato: {{libro.formato}}</p>
+                  <!-- volumen-->
+                  <p class="subtittle is-6">Volumen: {{libro.volumen}}</p>
+                  <!-- Resumen-->
+                  <p class="subtittle is-6">Resumen: {{libro.resumen}}</p>
+                </div>
+                <!-- Favorito-->
+                <a class="subtittle is-6" href="/addfavorito/{{libro.id_libro}}">+AddFav</a>
+              </div>
+              <!-- Resumen del Libro-->
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- Cerrar Ciclo For-->
+      </div>
+    </div>
+  </div>
+{% endblock %}

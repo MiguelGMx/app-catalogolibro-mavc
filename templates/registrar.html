@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-table is-4-desktop is-3-widescreen">
+          <form action="/registrar_usuario" method="post" class="box">
+            <div class="field">
+            <label for="" class="label">Email </label>
+            <div>
+              <input type="email" name="email" placeholder="e.g. bobsmith@gmail.com" class="input" required>
+              <span class="icon is-small is-left">
+              <i class="fa fa-evelope"></i>
+              </span>
+            </div>
+            </div>
+            <div class="field">
+            <label for="" class="label">Password</label>
+            <div class="control has-icons-lef">
+                <input type="password" name="password" placeholder="********" class="input" required>
+                <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+                </span>
+            </div>
+            </div>
+            <div class="field">
+              <a href="/iniciar_sesion">Iniciar Sesion</a>
+            </div>
+            <div class="field">
+            <button class="button is-success">
+              Registrar
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
