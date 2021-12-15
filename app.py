@@ -122,25 +122,18 @@ def login():
 	email = request.form["email"]
 	password = request.form["password"]
 	consultar_usuarios = Usuarios.query.filter_by(email=email).first()
-	bcrypt.check_password_hash(consultar_usuarios.password,password)
-	if bcrypt.check_password_hash(consultar_usuarios.password,password) == True:
-		consulta_libro = Libro.query.all()
-		for libro in consulta_libro:
-			obj_autor = Autor.query.filter_by(id_autor=libro.id_autor).first()
-			libro.nombre_autor = obj_autor.nombre_autor
-			libro.nacionalidad = obj_autor.nacionalidad
-			obj_editorial = Editorial.query.filter_by(id_editorial=libro.id_editorial).first()
-			libro.nombre_editorial = obj_editorial.nombre_editorial
-			obj_genero = Genero.query.filter_by(id_genero=libro.id_genero).first()
-			libro.tipo_genero = obj_genero.tipo_genero
-		resp = make_response(render_template("menu.html", consulta_libro=consulta_libro))
-		resp.set_cookie('userID', str(consultar_usuarios.id))
-		return resp
-	else:
+	if	consultar_usuarios == None:
 		mensaje="Correo o Contraseña incorrecta"
 		return render_template("index.html",mensaje=mensaje)
-
-	
+	else:
+		if bcrypt.check_password_hash(consultar_usuarios.password,password) == True:
+			libros = Libro.query.join(Genero, Libro.id_genero == Genero.id_genero).join(Autor, Libro.id_autor == Autor.id_autor).join(Editorial, Libro.id_editorial == Editorial.id_editorial).add_columns(Libro.link,Libro.nombre_libro,Autor.nombre_autor,Autor.nacionalidad,Libro.fecha_publicacion,Genero.tipo_genero,Editorial.nombre_editorial,Libro.numero_paginas,Libro.formato,Libro.volumen,Libro.resumen,Libro.id_libro)
+			resp = make_response(render_template("menu.html", consulta_libro=libros))
+			resp.set_cookie('userID', str(consultar_usuarios.id))
+			return resp
+		else:
+			mensaje="Correo o Contraseña incorrecta"
+			return render_template("index.html",mensaje=mensaje)
 
 #---------------------------------------- Cerrar sesion
 @app.route("/cerrar")
