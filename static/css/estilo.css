@@ -73,7 +73,9 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
     box-shadow: 0 0 20px rgba(0 , 0, 0, 0.15);
     color: #3a3333;
 }
-
+.error{
+    color: red;
+}
 .content-table thead tr {
     background-color: #009879;
     color: #071e36;

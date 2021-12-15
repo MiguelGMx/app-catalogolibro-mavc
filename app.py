@@ -8,8 +8,8 @@ from sqlalchemy.sql.elements import Null
 
 #---------------------------------  Conexion Base de datos 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1205@localhost:5432/db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://onppjfopaaxjta:00dee83c68dc4fa883bb2f7a1149ba2afff80f744e6aaddbcf3d32b7cfdbc79a@ec2-18-211-185-154.compute-1.amazonaws.com:5432/dc9v507bsqlkrd'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1205@localhost:5432/db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://onppjfopaaxjta:00dee83c68dc4fa883bb2f7a1149ba2afff80f744e6aaddbcf3d32b7cfdbc79a@ec2-18-211-185-154.compute-1.amazonaws.com:5432/dc9v507bsqlkrd'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -123,21 +123,24 @@ def login():
 	password = request.form["password"]
 	consultar_usuarios = Usuarios.query.filter_by(email=email).first()
 	bcrypt.check_password_hash(consultar_usuarios.password,password)
+	if bcrypt.check_password_hash(consultar_usuarios.password,password) == True:
+		consulta_libro = Libro.query.all()
+		for libro in consulta_libro:
+			obj_autor = Autor.query.filter_by(id_autor=libro.id_autor).first()
+			libro.nombre_autor = obj_autor.nombre_autor
+			libro.nacionalidad = obj_autor.nacionalidad
+			obj_editorial = Editorial.query.filter_by(id_editorial=libro.id_editorial).first()
+			libro.nombre_editorial = obj_editorial.nombre_editorial
+			obj_genero = Genero.query.filter_by(id_genero=libro.id_genero).first()
+			libro.tipo_genero = obj_genero.tipo_genero
+		resp = make_response(render_template("menu.html", consulta_libro=consulta_libro))
+		resp.set_cookie('userID', str(consultar_usuarios.id))
+		return resp
+	else:
+		mensaje="Correo o Contraseña incorrecta"
+		return render_template("index.html",mensaje=mensaje)
+
 	
-	consulta_libro = Libro.query.all()
-	for libro in consulta_libro:
-		obj_autor = Autor.query.filter_by(id_autor=libro.id_autor).first()
-		libro.nombre_autor = obj_autor.nombre_autor
-		libro.nacionalidad = obj_autor.nacionalidad
-		obj_editorial = Editorial.query.filter_by(id_editorial=libro.id_editorial).first()
-		libro.nombre_editorial = obj_editorial.nombre_editorial
-		obj_genero = Genero.query.filter_by(id_genero=libro.id_genero).first()
-		libro.tipo_genero = obj_genero.tipo_genero
-
-	resp = make_response(render_template("menu.html", consulta_libro=consulta_libro))
-	resp.set_cookie('userID', str(consultar_usuarios.id))
-
-	return resp
 
 #---------------------------------------- Cerrar sesion
 @app.route("/cerrar")
