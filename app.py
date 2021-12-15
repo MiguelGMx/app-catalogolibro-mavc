@@ -123,7 +123,7 @@ def login():
 	password = request.form["password"]
 	consultar_usuarios = Usuarios.query.filter_by(email=email).first()
 	if	consultar_usuarios == None:
-		mensaje="Correo o Contraseña incorrecta"
+		mensaje="Correo no registrado"
 		return render_template("index.html",mensaje=mensaje)
 	else:
 		if bcrypt.check_password_hash(consultar_usuarios.password,password) == True:
